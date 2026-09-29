@@ -1,0 +1,156 @@
+.page {
+  width: min(44rem, 100%);
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page p,
+.page li {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.page .kicker {
+  margin: 0 0 0.75rem;
+  color: var(--blue-600);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page > p {
+  margin: 0 0 1.75rem;
+  font-size: 1.0625rem;
+}
+
+.steps {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  position: relative;
+  padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--blue-50);
+}
+
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  top: 1.2rem;
+  left: 1.1rem;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: var(--blue-600);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.steps h2 {
+  margin: 0 0 0.4rem;
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.steps p,
+.steps ul {
+  margin: 0;
+}
+
+.steps ul {
+  margin-top: 0.75rem;
+  padding-left: 1.15rem;
+}
+
+.steps li li {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.steps li li::before {
+  content: none;
+}
+
+.steps a {
+  color: var(--blue-600);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.steps a:hover {
+  color: var(--blue-700);
+  text-decoration: underline;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875em;
+}
+
+pre {
+  margin: 0.85rem 0 0;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  background: var(--blue-700);
+  color: #e8eef8;
+}
+
+pre code {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  background: #b2dd2f;
+  color: #172554;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.cta:hover {
+  background: #c4ea4d;
+  transform: translateY(-1px);
+}
+
+.cta.secondary {
+  background: var(--blue-50);
+  color: var(--blue-700);
+}
+
+.cta.secondary:hover {
+  background: var(--blue-100);
+}

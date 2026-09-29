@@ -1,0 +1,157 @@
+.page {
+  width: min(48rem, 100%);
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page p {
+  margin: 0 0 1.75rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.page .error,
+.page .success {
+  margin: 0;
+}
+
+.page .error {
+  color: #991b1b;
+}
+
+.page .success {
+  color: #065f46;
+}
+
+.page .kicker {
+  margin: 0 0 0.75rem;
+  color: var(--blue-600);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auth-form textarea {
+  width: 100%;
+  min-height: 8rem;
+  resize: vertical;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #eef2f8;
+  color: inherit;
+  font: inherit;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.auth-form textarea:hover {
+  border-color: var(--blue-200);
+}
+
+.auth-form textarea:focus {
+  outline: none;
+  background: var(--surface);
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.18);
+}
+
+.table-block {
+  margin-top: 2rem;
+}
+
+.table-block h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.table-copy,
+.table-status {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.table-actions {
+  margin: 0 0 1rem;
+}
+
+.load-all {
+  padding: 0.65rem 1.1rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--blue-50);
+  color: var(--blue-700);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.load-all:hover:not(:disabled) {
+  background: var(--blue-100);
+}
+
+.load-all:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--blue-50);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+th,
+td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+th {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue-700);
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  color: var(--ink);
+  border-top: 1px solid var(--border);
+}
+
+tbody tr:first-child td {
+  border-top: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

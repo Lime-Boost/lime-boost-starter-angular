@@ -1,0 +1,64 @@
+<section class="page auth-page">
+  @if (!awaitingConfirmation()) {
+    <h1>Create account</h1>
+    <p class="subtitle">Sign up with your email address.</p>
+
+    <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <label>
+        Email
+        <input type="email" formControlName="email" autocomplete="email" />
+      </label>
+
+      <label>
+        Password
+        <app-password-input formControlName="password" autocomplete="new-password" />
+      </label>
+
+      <label>
+        Confirm password
+        <app-password-input formControlName="confirmPassword" autocomplete="new-password" />
+      </label>
+
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Creating account...' : 'Sign up' }}
+      </button>
+    </form>
+
+    <p class="footer-link">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </p>
+  } @else {
+    <h1>Verify your email</h1>
+    <p class="subtitle">Enter the verification code sent to {{ email() }}.</p>
+
+    <form class="auth-form" [formGroup]="confirmationForm" (ngSubmit)="onConfirm()">
+      <label>
+        Verification code
+        <input type="text" formControlName="code" autocomplete="one-time-code" inputmode="numeric" />
+      </label>
+
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
+
+      @if (success()) {
+        <p class="success" role="status">{{ success() }}</p>
+      }
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Verifying...' : 'Verify email' }}
+      </button>
+    </form>
+
+    <p class="footer-link">
+      Didn't get a code?
+      <button type="button" class="link-button" [disabled]="loading()" (click)="onResendCode()">
+        Resend code
+      </button>
+    </p>
+  }
+</section>

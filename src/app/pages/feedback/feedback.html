@@ -1,0 +1,94 @@
+<section class="page">
+  <p class="kicker">DynamoDB</p>
+  <h1>Feedback</h1>
+  <p>
+    Tell us what to improve. Lime Boost Starter saves this to the
+    <strong>{{ tableName }}</strong> DynamoDB table through the API Lime Boost deployed.
+  </p>
+
+  <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>
+      Name
+      <input type="text" formControlName="name" autocomplete="name" />
+    </label>
+
+    <label>
+      Follow-up email
+      <input type="email" formControlName="email" autocomplete="email" />
+    </label>
+
+    <label>
+      Leave a comment
+      <textarea formControlName="description" rows="6" placeholder="Please type your feedback here"></textarea>
+    </label>
+
+    @if (error()) {
+      <p class="error" role="alert">{{ error() }}</p>
+    }
+
+    @if (success()) {
+      <p class="success" role="status">{{ success() }}</p>
+    }
+
+    <button type="submit" [disabled]="loading()">
+      {{ loading() ? 'Saving...' : 'Send feedback' }}
+    </button>
+  </form>
+
+  <div class="table-block">
+    <h2>{{ tableName }} table</h2>
+    <p class="table-copy">Every row in the {{ tableName }} DynamoDB table.</p>
+
+    <div class="table-actions">
+      <button type="button" class="load-all" [disabled]="loadingList()" (click)="loadAll()">
+        {{ loadingList() ? 'Loading...' : 'Load all' }}
+      </button>
+    </div>
+
+    @if (listError()) {
+      <p class="error" role="alert">{{ listError() }}</p>
+    }
+
+    @if (loadingList()) {
+      <p class="table-status">Loading feedback from DynamoDB...</p>
+    } @else if (feedbacks().length === 0 && listingIncomplete()) {
+      <p class="table-status">
+        DynamoDB already has rows, but GET ALL returned empty id, name, and description.
+        Rows you send from this page still appear here. Copy attribute values in the
+        /feedback GET integration response the same way GET one does, then deploy prod.
+      </p>
+    } @else if (feedbacks().length === 0) {
+      <p class="table-status">No feedback in DynamoDB yet. Use the form to write the first row.</p>
+    } @else {
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Feedback saved to DynamoDB</caption>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Comment</th>
+              <th scope="col">Status</th>
+              <th scope="col">Sent</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of feedbacks(); track item.id) {
+              <tr>
+                <td>{{ item.name  }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.description  }}</td>
+                <td>{{ item.status  }}</td>
+                <td>{{ (item.timestamp | date: 'medium') }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+
+  <p class="footer-link">
+    <a routerLink="/dashboard">Back to dashboard</a>
+  </p>
+</section>

@@ -1,0 +1,55 @@
+<section class="page auth-page">
+  @if (!needsNewPassword()) {
+    <h1>Sign in</h1>
+    <p class="subtitle">Use your AWS Cognito user pool credentials.</p>
+
+    <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <label>
+        Email
+        <input type="email" formControlName="email" autocomplete="username" />
+      </label>
+
+      <label>
+        Password
+        <app-password-input formControlName="password" autocomplete="current-password" />
+      </label>
+
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Signing in...' : 'Sign in' }}
+      </button>
+    </form>
+
+    <p class="footer-link">
+      Don't have an account? <a routerLink="/register">Sign up</a>
+      <span class="separator">·</span>
+      <a routerLink="/forgot-password">Forgot password?</a>
+    </p>
+  } @else {
+    <h1>Set a new password</h1>
+    <p class="subtitle">Your account requires a new password before you can continue.</p>
+
+    <form class="auth-form" [formGroup]="newPasswordForm" (ngSubmit)="onCompleteNewPassword()">
+      <label>
+        New password
+        <app-password-input formControlName="newPassword" autocomplete="new-password" />
+      </label>
+
+      <label>
+        Confirm password
+        <app-password-input formControlName="confirmPassword" autocomplete="new-password" />
+      </label>
+
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Updating...' : 'Continue' }}
+      </button>
+    </form>
+  }
+</section>

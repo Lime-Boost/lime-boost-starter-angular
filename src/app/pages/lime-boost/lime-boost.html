@@ -1,0 +1,111 @@
+<section class="page">
+  <p class="kicker">Lime Boost</p>
+  <h1>How to use Lime Boost Starter</h1>
+  <p>
+    Lime Boost Starter is an open-source application that demonstrates how to build an application using AWS services
+    deployed and configured by Lime Boost. Lime Boost itself is proprietary software.
+  </p>
+  <ol class="steps">
+    <li>
+      <h2>Create an AWS account</h2>
+      <p>Lime Boost deploys infrastructure directly into your AWS account.
+        You own the AWS resources and can also view and manage them through the AWS Console.</p>
+    </li>
+    <li>
+      <h2>Open Lime Boost and connect AWS</h2>
+      <p>
+        Sign in to <a [href]="limeBoostAppUrl" target="_blank" rel="noopener noreferrer">app.limeboost.io</a> and follow
+        the account setup instructions.
+        This allows Lime Boost to deploy and configure AWS infrastructure on your behalf.
+      </p>
+    </li>
+    <li>
+      <h2>Deploy the AWS services</h2>
+      <p>In Lime Boost: Choose the infrastructure your application needs.
+        For Lime Boost Starter, you can deploy:
+      </p>
+      <ul>
+        <li><strong>Cognito</strong> Provides authentication for the Starter application, including registration,
+          sign-in, password reset, and authenticated sessions.
+        </li>
+        <li><strong>CloudFront</strong> Deploys the built Angular application and delivers it securely over HTTPS.
+        </li>
+        <li>
+          <strong>DynamoDB + API Gateway</strong> Provides a serverless database and HTTPS API that the Starter
+          application can use
+          to store and retrieve data.
+        </li>
+        <li><strong>Amazon Bedrock AgentCore</strong> Provides infrastructure for running production AI agents. <br><br>
+          Lime Boost can also deploy supporting AWS services such as Route 53 for domains and other infrastructure
+          required by your application.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h2>Connect Starter to Cognito</h2>
+      <p>
+        After Lime Boost has deployed Cognito, copy the AWS Region, User Pool ID, and App Client ID into:
+        <code>src/environments/environment.ts</code>:
+      </p>
+      <pre><code>{{ environmentSnippet }}</code></pre>
+      <p>
+        <br>
+        Now Lime Boost Starter can authenticate users against the Cognito User Pool created in your AWS account.
+      </p>
+    </li>
+    <li>
+      <h2>Connect Starter to DynamoDB</h2>
+      <p>
+        After deploying DynamoDB and API Gateway with Lime Boost, copy the API Gateway HTTPS endpoint into apiUrl:
+        <code>src/environments/environment.ts</code>:
+      </p>
+      <pre><code>{{ environmentSnippet }}</code></pre>
+      <p>
+        <br>
+        See feedback.service.ts for an example of sending application data through API Gateway to DynamoDB.
+      </p>
+    </li>
+    <li>
+      <h2>Run Lime Boost Starter locally</h2>
+      <p>
+        Lime Boost Starter is built with Angular. To run and modify the application locally, you need:
+        Node.js (v26 LTS recommended), npm (included with Node), <br>
+        Angular (v26 install globally via npm i -g @angular/cli)
+      </p>
+      <br>
+      <p>Install the project dependencies:</p>
+      <pre><code>{{ installSnippet }}</code></pre>
+      <br>
+      <p>Start the application:</p>
+      <pre><code>{{ startSnippet }}</code></pre>
+      <br>
+      <p>
+        Open the application in your browser and sign up.
+      </p>
+      <pre><code>{{ openSnippet }}</code></pre>
+      <p>
+        <br>
+        The authentication flow uses the Cognito User Pool deployed by Lime Boost. The protected dashboard
+        demonstrates an authenticated Cognito session, while the feedback example demonstrates storing
+        application data in DynamoDB.
+      </p>
+    </li>
+    <li>
+      <h2>Deploy the application with CloudFront</h2>
+      <p>Build this application:</p>
+      <pre><code>{{ buildSnippet }}</code></pre>
+      <p>
+        <br>
+        and upload the built source code with CloudFront deployment.
+        Before buying a domain you can use starter application on CloudFront distribution by it's HTTPS address.
+        <br>
+        Instructions for connecting GitHub will be later in Lime Boost.
+      </p>
+    </li>
+  </ol>
+
+  <div class="actions">
+    <a class="cta" [href]="limeBoostAppUrl" target="_blank" rel="noopener noreferrer">Open Lime Boost</a>
+    <a class="cta secondary" routerLink="/home">Back to home</a>
+  </div>
+</section>

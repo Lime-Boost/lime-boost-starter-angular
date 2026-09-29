@@ -1,0 +1,119 @@
+<section class="page">
+  <p class="kicker">Prospect Agent</p>
+  <h1>Search prospects</h1>
+  <p>
+    Tell Prospect Agent what your business does and who you want to reach. It searches for
+    companies that fit that brief.
+  </p>
+
+  <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>
+      What your business does
+      <textarea
+        formControlName="business"
+        rows="4"
+        placeholder="We sell wholesale bakery goods to restaurants in the Nordics"
+      ></textarea>
+    </label>
+
+    <label>
+      Who you want to find
+      <textarea
+        formControlName="lookingFor"
+        rows="3"
+        placeholder="Independent restaurants and cafes that bake little of their own bread"
+      ></textarea>
+    </label>
+
+    <label>
+      Industry
+      <input type="text" formControlName="industry" placeholder="Hospitality, logistics, SaaS…" />
+    </label>
+
+    <label>
+      Location or market
+      <input type="text" formControlName="location" placeholder="Helsinki, Finland, EU…" />
+    </label>
+
+    <label>
+      Company size
+      <select formControlName="companySize">
+        <option value="any">Any</option>
+        <option value="startup">Startup</option>
+        <option value="smb">Small or medium</option>
+        <option value="mid-market">Mid-market</option>
+        <option value="enterprise">Enterprise</option>
+      </select>
+    </label>
+
+    <label>
+      Keywords
+      <input type="text" formControlName="keywords" placeholder="wholesale, B2B, sustainability" />
+    </label>
+
+    @if (error()) {
+      <p class="error" role="alert">{{ error() }}</p>
+    }
+
+    <button type="submit" [disabled]="loading()">
+      {{ loading() ? 'Searching...' : 'Search prospects' }}
+    </button>
+  </form>
+
+  <div class="table-block">
+    <h2>Matches</h2>
+    <p class="table-copy">Companies Prospect Agent found for this search.</p>
+
+    @if (summary()) {
+      <p class="table-copy">{{ summary() }}</p>
+    }
+
+    @if (loading()) {
+      <p class="table-status">Searching for prospects...</p>
+    } @else if (!searched()) {
+      <p class="table-status">Describe your business and who you want to find, then search.</p>
+    } @else if (matches().length === 0) {
+      <p class="table-status">No matching prospects. Try a broader industry, location, or keywords.</p>
+    } @else {
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Prospects found for your business</caption>
+          <thead>
+            <tr>
+              <th scope="col">Company</th>
+              <th scope="col">Industry</th>
+              <th scope="col">Location</th>
+              <th scope="col">Why they fit</th>
+              <th scope="col">Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (match of matches(); track match.id) {
+              <tr>
+                <td>{{ match.company }}</td>
+                <td>{{ match.industry || '—' }}</td>
+                <td>{{ match.location || '—' }}</td>
+                <td>{{ match.reason || '—' }}</td>
+                <td>
+                  @if (match.website) {
+                    <a [href]="websiteHref(match.website)" target="_blank" rel="noopener noreferrer">{{
+                      match.website
+                    }}</a>
+                  } @else if (match.email) {
+                    <a [href]="'mailto:' + match.email">{{ match.email }}</a>
+                  } @else {
+                    —
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+
+  <p class="footer-link">
+    <a routerLink="/dashboard">Back to dashboard</a>
+  </p>
+</section>

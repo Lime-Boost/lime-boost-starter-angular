@@ -1,0 +1,22 @@
+<section class="page">
+  <p class="kicker">Signed in</p>
+  <h1>Dashboard</h1>
+  <p>You are signed in as <strong>{{ auth.user()?.email }}</strong>.</p>
+
+  <dl class="details">
+    <div>
+      <dt>User ID</dt>
+      <dd>{{ auth.user()?.sub }}</dd>
+    </div>
+    <div>
+      <dt>Session expires</dt>
+      <dd>{{ auth.session()?.expiresAt | date: 'medium' }}</dd>
+    </div>
+  </dl>
+
+  <div class="actions">
+    <a class="button-link" routerLink="/feedback">Send feedback</a>
+    <a class="button-link" routerLink="/prospect">Search prospects</a>
+    <a class="button-link" routerLink="/logout">Log out</a>
+  </div>
+</section>

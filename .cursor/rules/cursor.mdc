@@ -1,0 +1,221 @@
+# Lime Boost UI
+
+Angular 22 standalone app with Angular Material, RxJS, Cognito auth, and AWS resource screens.
+
+##
+
+This project uses Angular 22, TypeScript, RxJS, Angular Router, Angular HttpClient, and standalone APIs.
+
+Prefer modern Angular 22 conventions, standalone components, signals, functional APIs, and strongly typed code.
+
+You are an expert Angular 22 frontend engineer.
+
+Generate production-quality Angular code that is maintainable, testable, accessible, and aligned with current Angular best practices.
+
+Core principles:
+- Prefer standalone components, directives, and pipes.
+- Do not introduce NgModules unless explicitly required.
+- Prefer signals for local component state.
+- Prefer `computed()` for derived state.
+- Prefer `effect()` only for true side effects.
+- Keep components focused on presentation and orchestration.
+- Put reusable business logic and API access in services.
+- Favor composition over inheritance.
+- Prefer immutable state.
+- Use strict TypeScript types.
+- Avoid `any`; use `unknown` when the type is genuinely unknown.
+- Keep code concise and readable.
+- Avoid unnecessary abstractions and boilerplate.
+
+Dependency injection:
+- Prefer `inject()` where it improves readability.
+- Use Angular dependency injection instead of manually constructing services.
+- Keep services focused and single-purpose.
+- Use `providedIn: 'root'` for true application-wide singleton services where appropriate.
+
+Components:
+- Keep components small and focused.
+- Prefer signal-based inputs and outputs when appropriate.
+- Keep templates declarative.
+- Avoid complex business logic in templates.
+- Extract reusable UI into components.
+- Do not manually manipulate the DOM unless necessary.
+- Prefer Angular APIs such as host bindings, directives, and renderer abstractions when DOM interaction is required.
+
+Templates:
+- Use modern Angular control flow:
+  - `@if`
+  - `@for`
+  - `@switch`
+- Prefer `@for (...; track ...)` with a stable identifier.
+- Avoid legacy structural directive syntax when modern control flow is clearer.
+- Keep expressions simple.
+- Avoid calling expensive methods repeatedly from templates.
+- Use the `async` pipe or signals instead of manual subscriptions where appropriate.
+
+Signals:
+- Use `signal()` for mutable local state.
+- Use `computed()` for derived state.
+- Do not mutate objects held inside signals in place; replace them immutably.
+- Avoid using `effect()` to propagate state that can be represented with `computed()`.
+- Keep signal dependencies explicit and predictable.
+
+RxJS:
+- Use RxJS for asynchronous streams, HTTP flows, router events, and event composition where appropriate.
+- Prefer declarative operators over nested subscriptions.
+- Avoid manual `.subscribe()` in components unless performing an intentional side effect that cannot be represented declaratively.
+- Never create subscription leaks.
+- Use Angular lifecycle-aware utilities such as `takeUntilDestroyed()` when manual subscriptions are necessary.
+- Use:
+  - `map` for synchronous transformations
+  - `switchMap` when replacing an in-flight asynchronous operation
+  - `concatMap` when operation ordering matters
+  - `mergeMap` for concurrent asynchronous composition
+  - `catchError` for recoverable stream errors
+  - `finalize` for cleanup
+- Avoid deeply nested RxJS chains.
+- Extract complex operators into services or helper functions.
+
+HTTP:
+- Use Angular `HttpClient`.
+- Configure HTTP using `provideHttpClient()`.
+- Prefer functional interceptors with `withInterceptors(...)`.
+- Do not use deprecated or unnecessary `HttpClientModule` patterns in standalone applications.
+- Keep API calls in dedicated services.
+- Use strongly typed request and response models.
+- Do not expose `HttpClient` calls directly throughout components.
+- Centralize authentication headers, common error handling, correlation IDs, and cross-cutting HTTP behavior in interceptors where appropriate.
+- Do not retry non-idempotent requests automatically unless explicitly safe.
+- Treat every new subscription to an HttpClient Observable as a new HTTP request.
+
+Authentication:
+- Prefer JWT bearer tokens for backend APIs when authentication is required.
+- Attach access tokens using a functional HTTP interceptor.
+- Do not embed secrets or private API keys in Angular code.
+- Treat browser-side role checks as UI behavior only, never as a security boundary.
+- Keep authentication state in a dedicated auth service/store.
+- Keep authorization logic reusable and explicit.
+- Prefer route guards for navigation restrictions.
+- Backend APIs must always enforce authorization independently.
+
+Routing:
+- Prefer lazy-loaded standalone routes/components.
+- Use functional guards and resolvers.
+- Keep route configuration declarative.
+- Use resolvers when critical route data must be available before rendering.
+- Keep public and protected routes explicit.
+- Use route data for metadata and authorization requirements where useful.
+
+Forms:
+- Prefer strongly typed reactive forms for complex forms.
+- Use Angular validation APIs.
+- Keep validation rules declarative.
+- Display validation errors clearly and accessibly.
+- Do not duplicate server-side validation rules unnecessarily.
+- Treat server validation as authoritative.
+
+Error handling:
+- Handle HTTP errors consistently.
+- Do not silently swallow errors.
+- Convert backend error responses into user-friendly application messages.
+- Keep technical details out of user-facing messages.
+- Use global handling only for truly cross-cutting errors.
+- Handle domain-specific errors close to the feature that understands them.
+- Preserve useful diagnostic information for logging.
+
+State management:
+- Prefer local component signals for local UI state.
+- Use shared services or dedicated stores only when state is truly shared.
+- Avoid introducing a global state-management library unless complexity justifies it.
+- Keep server state and UI state conceptually separate.
+- Prefer derived state over duplicated state.
+
+Performance:
+- Use lazy loading.
+- Track `@for` collections with stable identifiers.
+- Avoid unnecessary change propagation.
+- Avoid repeated expensive calculations in templates.
+- Prefer signals/computed values for cached derived state.
+- Use optimized image handling where appropriate.
+- Avoid loading large dependencies when a native or Angular solution exists.
+
+Accessibility:
+- Prefer semantic HTML.
+- Support keyboard navigation.
+- Use accessible labels for interactive controls.
+- Preserve focus behavior during dialogs and navigation.
+- Use ARIA only when semantic HTML is insufficient.
+- Ensure form validation is understandable to screen-reader users.
+
+Testing:
+- Write focused component and service tests.
+- Use Angular TestBed where appropriate.
+- Use `provideHttpClient()` before `provideHttpClientTesting()` in HTTP tests.
+- Use `HttpTestingController` for API-service tests.
+- Test guards, interceptors, validation, and error states.
+- Prefer behavior-oriented tests over implementation-detail tests.
+- Keep tests deterministic.
+
+Application configuration:
+- Prefer modern provider functions.
+- Use `provideAppInitializer()` for asynchronous application initialization when needed.
+- Avoid deprecated `APP_INITIALIZER`.
+- Keep environment-specific configuration outside feature code.
+- Use injection tokens for application configuration where appropriate.
+
+Code organization:
+- Organize primarily by feature/domain rather than by technical type when the application grows.
+- Keep shared UI, infrastructure, auth, and configuration concerns separate.
+- Avoid giant shared modules or utility folders.
+- Keep files and names explicit and domain-oriented.
+
+When generating a feature:
+- Include component(s), service(s), interfaces/types, routing, and tests when appropriate.
+- Use standalone APIs.
+- Use signals for local state where appropriate.
+- Keep API access out of components.
+- Keep code concise but production-ready.
+
+Do not:
+- Use NgModules unless explicitly requested.
+- Use `any` without strong justification.
+- Put large amounts of business logic in components.
+- Manually subscribe everywhere.
+- Store secrets in frontend code.
+- Use browser-side authorization as the only security mechanism.
+- Use outdated Angular patterns when Angular 22 provides a modern alternative.
+- Introduce state-management libraries unnecessarily.
+- Use deprecated Angular APIs.
+
+## Do not
+
+- Do not invent new UI patterns when a sibling `*-more` / feature screen already has one.
+- Do not leave template bindings (`(click)="onXClick()"`) without a matching component method.
+- Do not commit secrets, `.env`, or credentials.
+
+## Services & HTTP
+
+- Put API URLs and HTTP calls in feature `*.service.ts` under the feature folder.
+- Use `HttpHeaders` with `Authorization: Bearer ${token}` from `AuthService`.
+- Prefer returning `Observable` from mutating/test methods so the component owns snackbar/dialog UX.
+- Use `environment.apiUrl` for the Lime Boost backend; `environment.apiGatewayUrl` only when intentionally hitting the public API Gateway.
+
+## Components
+
+- Prefer standalone components with explicit `imports` arrays.
+- Use `inject()` for DI; match existing `ChangeDetectionStrategy.Eager` usage.
+- Keep SCSS colocated; reuse shared variables from `src/variables` / `src/styles`.
+- Follow existing `*-more` screens when adding list/action pages.
+
+## Action buttons (create / test / delete / connect)
+
+Guard and handle in this order:
+
+1. `environment.onHoliday` → navigate `/on-holiday`
+2. `authService.accountConnectionReady()`
+3. Auth check → navigate `/login` if needed
+4. `isSelected()` when the action needs a row
+5. Confirm with `LimeDialogComponent`
+6. Call the feature service; show success/error via `MatSnackBar`
+
+Mirror patterns in `cognito-more`, `cloud-front-more`, and `api-gateway-more`.

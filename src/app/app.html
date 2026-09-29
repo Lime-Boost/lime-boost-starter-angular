@@ -1,0 +1,28 @@
+<header class="app-header">
+  <div class="header-inner">
+    <a class="brand" routerLink="/home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      Lime Boost Starter
+    </a>
+
+    <nav class="nav">
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      <a class="lime-boost-button" routerLink="/lime-boost" routerLinkActive="active">Lime Boost</a>
+
+      @if (auth.isAuthenticated()) {
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/feedback" routerLinkActive="active">Feedback</a>
+        <a routerLink="/prospect" routerLinkActive="active">Prospect Agent</a>
+        <span class="user">{{ auth.user()?.email }}</span>
+        <button type="button" class="link-button" (click)="logOut()">Log out</button>
+      } @else {
+        <a routerLink="/login" routerLinkActive="active">Sign in</a>
+        <a class="nav-cta" routerLink="/register" routerLinkActive="active">Sign up</a>
+      }
+    </nav>
+  </div>
+</header>
+
+<main class="app-main">
+  <router-outlet />
+</main>
